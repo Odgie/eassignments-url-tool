@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eAssignments Link Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #004d99;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0099cc;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0077a3;
+        }
+        #result-area {
+            margin-top: 25px;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+            word-wrap: break-word; /* Ensures long links wrap correctly */
+        }
+        #generated-link {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>eAssignments Direct Submission Link Generator</h2>
+    <p>Enter the numerical Assignment ID to create the direct submission URL.</p>
+
+    <label for="assignment-id">Assignment ID (e.g., 36173):</label>
+    <input type="text" id="assignment-id" placeholder="Enter ID here">
+
+    <button onclick="generateLink()">Generate Link 🔗</button>
+
+    <div id="result-area">
+        <p>Generated Link:</p>
+        <div id="generated-link"></div>
+    </div>
+</div>
+
+<script>
+    function generateLink() {
+        const baseURL = "https://submit.assignments.soton.ac.uk/Submit?assignmentId=";
+        const assignmentID = document.getElementById('assignment-id').value.trim();
+        const resultDiv = document.getElementById('generated-link');
+
+        if (assignmentID === "") {
+            resultDiv.innerHTML = "<span style='color: red;'>Please enter a valid Assignment ID.</span>";
+            return;
+        }
+
+        // Basic check to ensure it looks like a number
+        if (!/^\d+$/.test(assignmentID)) {
+            resultDiv.innerHTML = "<span style='color: orange;'>ID must contain only numbers.</span>";
+            return;
+        }
+
+        const fullURL = baseURL + assignmentID;
+        resultDiv.innerHTML = `<a href="${fullURL}" target="_blank">${fullURL}</a>`;
+    }
+</script>
+
+</body>
+</html>
